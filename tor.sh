@@ -2,7 +2,7 @@
 
 # Check if the script is run as root (to ensure proper permissions)
 if [[ $EUID -ne 0 ]]; then
-  echo "This script must be run as root. Please use 'sudo'."
+  echo "This script must be run as root. Please use 'su' before run."
   exit 1
 fi
 
@@ -107,7 +107,7 @@ if [ "$tor_node_type" -eq 1 ]; then
 
   # Prompt for Nickname and ContactInfo
   read -p "Enter the Nickname for your middle relay: " nickname
-  read -p "Enter the ContactInfo (your email, ATTENTION it will be published): " contact_info
+  read -p "Enter the ContactInfo (your email, ATTENTION it will be published on tor.metrics): " contact_info
 
   # Define the Tor middle relay configuration
   torrc_configuration=$(cat <<EOL
@@ -133,6 +133,8 @@ ContactInfo $contact_info
 ORPort 443
 ExitRelay 1
 SocksPort 0
+DirPort 80
+DirPortFrontPage /etc/tor/tor-exit-notice.html
 ExitPolicy accept *:20-21     # FTP
 ExitPolicy accept *:22        # SSH
 ExitPolicy accept *:23        # Telnet
