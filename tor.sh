@@ -21,9 +21,9 @@ fi
 
 # Check if the system is running Debian or Ubuntu
 if [ -f /etc/os-release ]; then
-    source /etc/os-release
-    if [ "$ID" == "debian" ]; then
-        unattended_upgrades_content="Unattended-Upgrade::Origins-Pattern {
+  source /etc/os-release
+  if [ "$ID" == "debian" ]; then
+    unattended_upgrades_content="Unattended-Upgrade::Origins-Pattern {
     \"origin=Debian,codename=${VERSION_CODENAME},label=Debian-Security\";
     \"origin=TorProject\";
 };
@@ -31,8 +31,8 @@ Unattended-Upgrade::Package-Blacklist {
 };
 Unattended-Upgrade::Automatic-Reboot "true";
 "
-    elif [ "$ID" == "ubuntu" ]; then
-        unattended_upgrades_content="Unattended-Upgrade::Allowed-Origins {
+  elif [ "$ID" == "ubuntu" ]; then
+    unattended_upgrades_content="Unattended-Upgrade::Allowed-Origins {
     \"${ID}:${VERSION_CODENAME}-security\";
     \"TorProject:${VERSION_CODENAME}\";
 };
@@ -40,29 +40,29 @@ Unattended-Upgrade::Package-Blacklist {
 };
 Unattended-Upgrade::Automatic-Reboot "true";
 "
-    else
-        echo "Unsupported distribution: $ID"
-        exit 1
-    fi
+  else
+    echo "Unsupported distribution: $ID"
+    exit 1
+  fi
 
-    # Define the unattended-upgrades file
-    unattended_upgrades_file="/etc/apt/apt.conf.d/50unattended-upgrades"
+  # Define the unattended-upgrades file
+  unattended_upgrades_file="/etc/apt/apt.conf.d/50unattended-upgrades"
 
-    # Edit or create the unattended-upgrades file
-    if [ -f "$unattended_upgrades_file" ]; then
-        echo "$unattended_upgrades_content" | tee "$unattended_upgrades_file" > /dev/null
-        echo "Updated $unattended_upgrades_file"
-    else
-        echo "$unattended_upgrades_content" | tee "$unattended_upgrades_file" > /dev/null
-        echo "Created $unattended_upgrades_file"
-    fi
+  # Edit or create the unattended-upgrades file
+  if [ -f "$unattended_upgrades_file" ]; then
+    echo "$unattended_upgrades_content" | tee "$unattended_upgrades_file" >/dev/null
+    echo "Updated $unattended_upgrades_file"
+  else
+    echo "$unattended_upgrades_content" | tee "$unattended_upgrades_file" >/dev/null
+    echo "Created $unattended_upgrades_file"
+  fi
 else
-    echo "Unsupported distribution: /etc/os-release not found"
+  echo "Unsupported distribution: /etc/os-release not found"
 fi
 
-
 # Define the lines for 20auto-upgrades
-lines_20auto_upgrades=$(cat <<EOL
+lines_20auto_upgrades=$(
+  cat <<EOL
 APT::Periodic::Update-Package-Lists "1";
 APT::Periodic::AutocleanInterval "5";
 APT::Periodic::Unattended-Upgrade "1";
@@ -81,36 +81,35 @@ fi
 
 # Check if the system is running Debian or Ubuntu for setup auto update for the right os
 if [ -f /etc/os-release ]; then
-    source /etc/os-release
-    if [[ $ID == "debian" || $ID == "ubuntu" ]]; then
-        oscodename="$VERSION_CODENAME"
-        echo "Distro codename is: $oscodename"
+  source /etc/os-release
+  if [[ $ID == "debian" || $ID == "ubuntu" ]]; then
+    oscodename="$VERSION_CODENAME"
+    echo "Distro codename is: $oscodename"
 
-        # Define the tor.list content
-        tor_list_content="deb     [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org $oscodename main
+    # Define the tor.list content
+    tor_list_content="deb     [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org $oscodename main
 deb-src [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org $oscodename main"
 
-
-        # Edit or create the tor.list file
-        tor_list_file="/etc/apt/sources.list.d/tor.list"
-        if [ -f "$tor_list_file" ]; then
-            echo -e "$tor_list_content" | tee "$tor_list_file" > /dev/null
-            echo "Updated $tor_list_file with codename: $oscodename"
-        else
-            echo -e "$tor_list_content" | tee "$tor_list_file" > /dev/null
-            echo "Created $tor_list_file with codename: $oscodename"
-        fi
+    # Edit or create the tor.list file
+    tor_list_file="/etc/apt/sources.list.d/tor.list"
+    if [ -f "$tor_list_file" ]; then
+      echo -e "$tor_list_content" | tee "$tor_list_file" >/dev/null
+      echo "Updated $tor_list_file with codename: $oscodename"
     else
-        echo "Unsupported distribution: $ID"
+      echo -e "$tor_list_content" | tee "$tor_list_file" >/dev/null
+      echo "Created $tor_list_file with codename: $oscodename"
     fi
+  else
+    echo "Unsupported distribution: $ID"
+  fi
 else
-    echo "Unsupported distribution: /etc/os-release not found"
+  echo "Unsupported distribution: /etc/os-release not found"
 fi
 
 # Add a comment for clarity
 echo "Adding the Tor Project repository and installing Tor..."
 
-# Download of PGP key and installation 
+# Download of PGP key and installation
 wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | tee /usr/share/keyrings/tor-archive-keyring.gpg >/dev/null
 apt update
 apt install -y tor deb.torproject.org-keyring
@@ -137,7 +136,8 @@ if [ "$tor_node_type" -eq 1 ]; then
   read -p "Enter the ContactInfo (your email, ATTENTION it will be published on tor.metrics): " contact_info
 
   # Define the Tor middle relay configuration
-  torrc_configuration=$(cat <<EOL
+  torrc_configuration=$(
+    cat <<EOL
 Nickname $nickname
 ContactInfo $contact_info
 ORPort 443
@@ -154,7 +154,8 @@ else
   read -p "Enter the ContactInfo (your email, ATTENTION it will be published): " contact_info
 
   # Define the Tor exit relay configuration
-  torrc_configuration=$(cat <<EOL
+  torrc_configuration=$(
+    cat <<EOL
 Nickname $nickname
 ContactInfo $contact_info
 ORPort 443
@@ -247,7 +248,7 @@ EOL
 fi
 
 # Update the Tor configuration in /etc/tor/torrc
-echo "$torrc_configuration" | tee /etc/tor/torrc > /dev/null
+echo "$torrc_configuration" | tee /etc/tor/torrc >/dev/null
 
 echo "Tor configuration updated in /etc/tor/torrc."
 
