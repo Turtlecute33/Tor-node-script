@@ -53,7 +53,6 @@ echo "$(tput setaf 2)
     7@,Y@UqB@B7$(tput setaf 5) ir ,L;r: $(
   tput bold
   tput setaf 7
-)u@7  
      r@LiBMBB@Bu$(tput setaf 5)   rr:.$(
   tput bold
   tput setaf 7
@@ -83,6 +82,7 @@ if [[ $EUID -ne 0 ]]; then
   echo "This script must be run as root. Please use 'su' before run."
   exit 1
 fi
+)u@7  
 
 # Update the package list
 echo "$(tput setaf 6)Updating your system...$(tput sgr0)"
@@ -212,8 +212,8 @@ if [ "$tor_node_type" -eq 1 ]; then
   # Prompt for Nickname and ContactInfo
   read -p "Enter the Nickname for your middle relay: " nickname
   read -p "Enter the ContactInfo (your email, ATTENTION it will be published on tor.metrics): " contact_info
-  echo "I need to know the maximum weekly bandwith that the node can use. Check on your VPS provider website the maximum monthly data usage (ex: 1TBytes) and divide it by 4 (ex: 1TBytes / 4 = 250GBytes)."
-  read -p "Enter the WEEKLY bandwith that you can use (ex: '200 GBytes', '1 TBytes', ecc): " bandwith1
+  echo "I need to know the maximum weekly bandwith that the node can use. Check on your VPS provider website the maximum monthly data usage (ex: 1 TB) and divide it by 4 (ex: 1 TB / 4 = 250 GB)."
+  read -p "Enter the WEEKLY bandwith that you can use (ex: '200 GB', '1 TB', ecc): " bandwith1
 
   # Define the Tor middle relay configuration
   torrc_configuration=$(
@@ -234,8 +234,8 @@ else
   # Prompt for Nickname and ContactInfo
   read -p "Enter the Nickname for your exit relay: " nickname
   read -p "Enter the ContactInfo (your email, ATTENTION it will be published): " contact_info
-  echo "I need to know the maximum weekly bandwith that the node can use. Check on your VPS provider website the maximum monthly data usage (ex: 1TBytes) and divide it by 4 (ex: 1TBytes / 4 = 250GBytes)."
-  read -p "Enter the WEEKLY bandwith that you can use (ex: '200 GBytes', '1 TBytes', ecc): " bandwith2
+  echo "I need to know the maximum weekly bandwith that the node can use. Check on your VPS provider website the maximum monthly data usage (ex: 1 TB) and divide it by 4 (ex: 1 TB / 4 = 250 GB)."
+  read -p "Enter the WEEKLY bandwith that you can use (ex: '200 GB', '1 TB', ecc): " bandwith2
 
   # Define the Tor exit relay configuration
   torrc_configuration=$(
