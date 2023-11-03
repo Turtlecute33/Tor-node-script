@@ -53,6 +53,7 @@ echo "$(tput setaf 2)
     7@,Y@UqB@B7$(tput setaf 5) ir ,L;r: $(
   tput bold
   tput setaf 7
+ )u@7  
      r@LiBMBB@Bu$(tput setaf 5)   rr:.$(
   tput bold
   tput setaf 7
@@ -82,7 +83,6 @@ if [[ $EUID -ne 0 ]]; then
   echo "This script must be run as root. Please use 'su' before run."
   exit 1
 fi
-)u@7  
 
 # Update the package list
 echo "$(tput setaf 6)Updating your system...$(tput sgr0)"
