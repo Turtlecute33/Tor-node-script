@@ -79,10 +79,6 @@ else
   echo "Lines added to /etc/apt/apt.conf.d/20auto-upgrades."
 fi
 
-# Define the lines to add to the tor.list file
-GNU nano 7.2                            torlist.sh
-#!/bin/bash
-
 # Check if the system is running Debian or Ubuntu for setup auto update for the right os
 if [ -f /etc/os-release ]; then
     source /etc/os-release
@@ -91,7 +87,9 @@ if [ -f /etc/os-release ]; then
         echo "Distro codename is: $oscodename"
 
         # Define the tor.list content
-        tor_list_content="deb     [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg>
+        tor_list_content="deb     [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org $oscodename main
+deb-src [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org $oscodename main"
+
 
         # Edit or create the tor.list file
         tor_list_file="/etc/apt/sources.list.d/tor.list"
