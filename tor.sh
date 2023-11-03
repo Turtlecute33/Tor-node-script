@@ -29,8 +29,8 @@ if [ -f /etc/os-release ]; then
 };
 Unattended-Upgrade::Package-Blacklist {
 };
-
-Unattended-Upgrade::Automatic-Reboot "true";"
+Unattended-Upgrade::Automatic-Reboot "true";
+"
     elif [ "$ID" == "ubuntu" ]; then
         unattended_upgrades_content="Unattended-Upgrade::Allowed-Origins {
     \"${ID}:${VERSION_CODENAME}-security\";
@@ -38,8 +38,8 @@ Unattended-Upgrade::Automatic-Reboot "true";"
 };
 Unattended-Upgrade::Package-Blacklist {
 };
-
-Unattended-Upgrade::Automatic-Reboot "true";"
+Unattended-Upgrade::Automatic-Reboot "true";
+"
     else
         echo "Unsupported distribution: $ID"
         exit 1
