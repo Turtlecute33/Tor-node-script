@@ -19,26 +19,47 @@ else
   echo "Installation failed. can't install packages."
 fi
 
-# Define the lines for 50unattended-upgrades
-lines_50unattended_upgrades=$(cat <<EOL
-Unattended-Upgrade::Origins-Pattern {
-    "origin=Debian,codename=\${codename},label=Debian-Security";
-    "origin=TorProject";
+# Check if the system is running Debian or Ubuntu
+if [ -f /etc/os-release ]; then
+    source /etc/os-release
+    if [ "$ID" == "debian" ]; then
+        unattended_upgrades_content="Unattended-Upgrade::Origins-Pattern {
+    \"origin=Debian,codename=${VERSION_CODENAME},label=Debian-Security\";
+    \"origin=TorProject\";
 };
-
 Unattended-Upgrade::Package-Blacklist {
 };
-EOL
-)
 
-# Check if the lines are already in the file 50unattended-upgrades
-if grep -q "Unattended-Upgrade::Origins-Pattern" /etc/apt/apt.conf.d/50unattended-upgrades; then
-  echo "The lines are already in the file 50unattended-upgrades."
+Unattended-Upgrade::Automatic-Reboot "true";"
+    elif [ "$ID" == "ubuntu" ]; then
+        unattended_upgrades_content="Unattended-Upgrade::Allowed-Origins {
+    \"${ID}:${VERSION_CODENAME}-security\";
+    \"TorProject:${VERSION_CODENAME}\";
+};
+Unattended-Upgrade::Package-Blacklist {
+};
+
+Unattended-Upgrade::Automatic-Reboot "true";"
+    else
+        echo "Unsupported distribution: $ID"
+        exit 1
+    fi
+
+    # Define the unattended-upgrades file
+    unattended_upgrades_file="/etc/apt/apt.conf.d/50unattended-upgrades"
+
+    # Edit or create the unattended-upgrades file
+    if [ -f "$unattended_upgrades_file" ]; then
+        echo "$unattended_upgrades_content" | tee "$unattended_upgrades_file" > /dev/null
+        echo "Updated $unattended_upgrades_file"
+    else
+        echo "$unattended_upgrades_content" | tee "$unattended_upgrades_file" > /dev/null
+        echo "Created $unattended_upgrades_file"
+    fi
 else
-  # Append the lines to the configuration file 50unattended-upgrades
-  echo "$lines_50unattended_upgrades" | tee -a /etc/apt/apt.conf.d/50unattended-upgrades
-  echo "Lines added to /etc/apt/apt.conf.d/50unattended-upgrades."
+    echo "Unsupported distribution: /etc/os-release not found"
 fi
+
 
 # Define the lines for 20auto-upgrades
 lines_20auto_upgrades=$(cat <<EOL
