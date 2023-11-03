@@ -165,7 +165,6 @@ if [ -f /etc/os-release ]; then
   source /etc/os-release
   if [[ $ID == "debian" || $ID == "ubuntu" ]]; then
     oscodename="$VERSION_CODENAME"
-    echo "Distro codename is: $oscodename"
 
     # Define the tor.list content
     tor_list_content="deb     [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org $oscodename main
@@ -213,12 +212,16 @@ if [ "$tor_node_type" -eq 1 ]; then
   # Prompt for Nickname and ContactInfo
   read -p "Enter the Nickname for your middle relay: " nickname
   read -p "Enter the ContactInfo (your email, ATTENTION it will be published on tor.metrics): " contact_info
+  echo "I need to know the maximum weekly bandwith that the node can use. Check on your VPS provider website the maximum monthly data usage (ex: 1TBytes) and divide it by 4 (ex: 1TBytes / 4 = 250GBytes)."
+  read -p "Enter the WEEKLY bandwith that you can use (ex: 200 GBytes, 1TBytes, ecc): " bandwith1
 
   # Define the Tor middle relay configuration
   torrc_configuration=$(
     cat <<EOL
 Nickname $nickname
 ContactInfo $contact_info
+AccountingStart week 1 10:00
+AccountingMax $bandwith1
 ORPort 443
 ExitRelay 0
 SocksPort 0
@@ -231,12 +234,16 @@ else
   # Prompt for Nickname and ContactInfo
   read -p "Enter the Nickname for your exit relay: " nickname
   read -p "Enter the ContactInfo (your email, ATTENTION it will be published): " contact_info
+  echo "I need to know the maximum weekly bandwith that the node can use. Check on your VPS provider website the maximum monthly data usage (ex: 1TBytes) and divide it by 4 (ex: 1TBytes / 4 = 250GBytes)."
+  read -p "Enter the WEEKLY bandwith that you can use (ex: 200 GBytes, 1TBytes, ecc): " bandwith2
 
   # Define the Tor exit relay configuration
   torrc_configuration=$(
     cat <<EOL
 Nickname $nickname
 ContactInfo $contact_info
+AccountingStart week 1 10:00
+AccountingMax $bandwith2
 ORPort 443
 ExitRelay 1
 SocksPort 0
