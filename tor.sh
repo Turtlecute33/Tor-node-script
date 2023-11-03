@@ -213,7 +213,7 @@ if [ "$tor_node_type" -eq 1 ]; then
   read -p "Enter the Nickname for your middle relay: " nickname
   read -p "Enter the ContactInfo (your email, ATTENTION it will be published on tor.metrics): " contact_info
   echo "I need to know the maximum weekly bandwith that the node can use. Check on your VPS provider website the maximum monthly data usage (ex: 1TBytes) and divide it by 4 (ex: 1TBytes / 4 = 250GBytes)."
-  read -p "Enter the WEEKLY bandwith that you can use (ex: "200 GBytes", "1 TBytes", ecc): " bandwith1
+  read -p "Enter the WEEKLY bandwith that you can use (ex: '200 GBytes', '1 TBytes', ecc): " bandwith1
 
   # Define the Tor middle relay configuration
   torrc_configuration=$(
@@ -235,7 +235,7 @@ else
   read -p "Enter the Nickname for your exit relay: " nickname
   read -p "Enter the ContactInfo (your email, ATTENTION it will be published): " contact_info
   echo "I need to know the maximum weekly bandwith that the node can use. Check on your VPS provider website the maximum monthly data usage (ex: 1TBytes) and divide it by 4 (ex: 1TBytes / 4 = 250GBytes)."
-  read -p "Enter the WEEKLY bandwith that you can use (ex: "200 GBytes", "1 TBytes", ecc): " bandwith2
+  read -p "Enter the WEEKLY bandwith that you can use (ex: '200 GBytes', '1 TBytes', ecc): " bandwith2
 
   # Define the Tor exit relay configuration
   torrc_configuration=$(
