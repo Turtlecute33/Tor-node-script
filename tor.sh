@@ -36,7 +36,7 @@ if grep -q "Unattended-Upgrade::Origins-Pattern" /etc/apt/apt.conf.d/50unattende
   echo "The lines are already in the file 50unattended-upgrades."
 else
   # Append the lines to the configuration file 50unattended-upgrades
-  echo "$lines_50unattended_upgrades" | sudo tee -a /etc/apt/apt.conf.d/50unattended-upgrades
+  echo "$lines_50unattended_upgrades" | tee -a /etc/apt/apt.conf.d/50unattended-upgrades
   echo "Lines added to /etc/apt/apt.conf.d/50unattended-upgrades."
 fi
 
@@ -54,7 +54,7 @@ if grep -q "APT::Periodic::Update-Package-Lists" /etc/apt/apt.conf.d/20auto-upgr
   echo "The lines are already in the file 20auto-upgrades."
 else
   # Append the lines to the configuration file 20auto-upgrades
-  echo "$lines_20auto_upgrades" | sudo tee -a /etc/apt/apt.conf.d/20auto-upgrades
+  echo "$lines_20auto_upgrades" | tee -a /etc/apt/apt.conf.d/20auto-upgrades
   echo "Lines added to /etc/apt/apt.conf.d/20auto-upgrades."
 fi
 
@@ -220,7 +220,7 @@ EOL
 fi
 
 # Update the Tor configuration in /etc/tor/torrc
-echo "$torrc_configuration" | sudo tee /etc/tor/torrc > /dev/null
+echo "$torrc_configuration" | tee /etc/tor/torrc > /dev/null
 
 echo "Tor configuration updated in /etc/tor/torrc."
 
@@ -228,7 +228,7 @@ echo "Tor configuration updated in /etc/tor/torrc."
 echo "Restarting the Tor service..."
 
 # Restart the Tor service
-sudo systemctl restart tor@default
+systemctl restart tor@default
 
 # Check the exit status of the service restart
 if [ $? -eq 0 ]; then
@@ -238,4 +238,4 @@ else
 fi
 
 # Happy ending!
-echo ""Thank you for using my script! If it has been helpful to you, please consider visiting https://salviamotor.vado.li and making a Bitcoin donation.""
+echo "Thank you for using my script! If it has been helpful to you, please consider visiting https://salviamotor.vado.li and making a Bitcoin donation."
