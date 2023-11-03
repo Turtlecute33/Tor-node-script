@@ -1,5 +1,42 @@
 #!/bin/bash
 
+echo "$(tput setaf 2)
+                   ..         
+                  ,:          
+          .      ::           
+          .:    :2.           
+           .:,  1L            
+            .v: Z, ..::,      
+             :k:N.Lv:         
+              22ukL           
+              JSYk.$(tput bold ; tput setaf 7)           
+             ,B@B@i           
+             BO@@B@.          
+           :B@L@Bv:@7         
+         .PB@iBB@  .@Mi       
+       .P@B@iE@@r  . 7B@i     
+      5@@B@:NB@1$(tput setaf 5) r  ri:$(tput bold ; tput setaf 7)7@M    
+    .@B@BG.OB@B$(tput setaf 5)  ,.. .i, $(tput bold ; tput setaf 7)MB,  
+    @B@BO.B@@B$(tput setaf 5)  i7777,    $(tput bold ; tput setaf 7)MB. 
+   PB@B@.OB@BE$(tput setaf 5)  LririL,.L. $(tput bold ; tput setaf 7)@P 
+   B@B@5iB@B@i$(tput setaf 5)  :77r7L, L7 $(tput bold ; tput setaf 7)O@ 
+   @B1B27@B@B,$(tput setaf 5) . .:ii.  r7 $(tput bold ; tput setaf 7)BB 
+   O@.@M:B@B@:$(tput setaf 5) v7:    ::.  $(tput bold ; tput setaf 7)BM 
+   :Br7@L5B@BO$(tput setaf 5) irL: :v7L. $(tput bold ; tput setaf 7)P@, 
+    7@,Y@UqB@B7$(tput setaf 5) ir ,L;r: $(tput bold ; tput setaf 7)u@7  
+     r@LiBMBB@Bu$(tput setaf 5)   rr:.$(tput bold ; tput setaf 7):B@i   
+       FNL1NB@@@@:   ;OBX     
+         rLu2ZB@B@@XqG7$(tput sgr0 ; tput setaf 2)      
+            . rJuv::          
+                              
+            $(tput setaf 2)Tor node script
+           $(tput bold ; tput setaf 5)by Turtlecute.$(tput sgr0)
+"
+
+echo "$(tput setaf 6)This script will auto-setup a tor node for you!.$(tput sgr0)"
+read -p "$(tput bold ; tput setaf 2)Press [Enter] to begin, [Ctrl-C] to abort...$(tput sgr0)"
+
+
 # Check if the script is run as root (to ensure proper permissions)
 if [[ $EUID -ne 0 ]]; then
   echo "This script must be run as root. Please use 'su' before run."
@@ -7,19 +44,24 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # Update the package list
-apt-get update
+echo "$(tput setaf 6)Updating your system...$(tput sgr0)"
+apt-get update 
 
 # Install the desired packages
-apt-get install -y unattended-upgrades apt-listchanges wget gpg apt-transport-https
+echo "$(tput setaf 6)Installing dependencies...$(tput sgr0)"
+apt-get install -y unattended-upgrades apt-listchanges wget gpg apt-transport-https 
 
 # Check the exit status of the installation
 if [ $? -eq 0 ]; then
   echo "Installation completed successfully."
+  checkmark
 else
   echo "Installation failed. can't install packages."
+  crossmark
 fi
 
 # Check if the system is running Debian or Ubuntu
+echo "$(tput setaf 6)Configuring auto updates...$(tput sgr0)"
 if [ -f /etc/os-release ]; then
   source /etc/os-release
   if [ "$ID" == "debian" ]; then
@@ -106,19 +148,19 @@ else
   echo "Unsupported distribution: /etc/os-release not found"
 fi
 
-# Add a comment for clarity
-echo "Adding the Tor Project repository and installing Tor..."
-
 # Download of PGP key and installation
-wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | tee /usr/share/keyrings/tor-archive-keyring.gpg >/dev/null
-apt update
-apt install -y tor deb.torproject.org-keyring
+echo "$(tput setaf 6)Installing Tor...$(tput sgr0)"
+wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | tee /usr/share/keyrings/tor-archive-keyring.gpg >/dev/null >/dev/null 2>&1 & spinner $!
+apt update >/dev/null 2>&1 & spinner $!
+apt install -y tor deb.torproject.org-keyring >/dev/null 2>&1 & spinner $!
 
 # Check the exit status of the installation
 if [ $? -eq 0 ]; then
   echo "Tor installed successfully."
+  checkmark
 else
   echo "Tor installation failed. Please check for errors."
+  crossmark
 fi
 
 # Ask the user to select a Tor node type
