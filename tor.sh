@@ -190,16 +190,14 @@ fi
 # Download of PGP key and installation
 echo "$(tput setaf 6)Installing Tor...$(tput sgr0)"
 wget -qO- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | tee /usr/share/keyrings/tor-archive-keyring.gpg >/dev/null 
-apt update >/dev/null
+apt-get update >/dev/null
 apt install -y tor deb.torproject.org-keyring >/dev/null
 
 # Check the exit status of the installation
 if [ $? -eq 0 ]; then
   echo "Tor installed successfully."
-  checkmark
 else
   echo "Tor installation failed. Please check for errors."
-  crossmark
 fi
 
 # Ask the user to select a Tor node type
