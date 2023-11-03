@@ -59,26 +59,34 @@ else
 fi
 
 # Define the lines to add to the tor.list file
-lines_to_add=$(cat <<EOL
-deb     [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org <DISTRIBUTION> main
-deb-src [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg] https://deb.torproject.org/torproject.org <DISTRIBUTION> main
-EOL
-)
+GNU nano 7.2                            torlist.sh
+#!/bin/bash
 
-# Prompt the user for the distribution name
-read -p "Enter your Debian distribution (e.g., buster, bullseye or bookworm): " distribution
-lines_to_add="${lines_to_add//<DISTRIBUTION>/$distribution}"
+# Check if the system is running Debian or Ubuntu for setup auto update for the right os
+if [ -f /etc/os-release ]; then
+    source /etc/os-release
+    if [[ $ID == "debian" || $ID == "ubuntu" ]]; then
+        oscodename="$VERSION_CODENAME"
+        echo "Distro codename is: $oscodename"
 
-# Check if the lines are already in the file
-if grep -q "deb     \[signed-by=/usr/share/keyrings/tor-archive-keyring.gpg\] https://deb.torproject.org/torproject.org $distribution main" /etc/apt/sources.list.d/tor.list; then
-  echo "The lines are already in the tor.list file."
-  exit 0
+        # Define the tor.list content
+        tor_list_content="deb     [signed-by=/usr/share/keyrings/tor-archive-keyring.gpg>
+
+        # Edit or create the tor.list file
+        tor_list_file="/etc/apt/sources.list.d/tor.list"
+        if [ -f "$tor_list_file" ]; then
+            echo -e "$tor_list_content" | tee "$tor_list_file" > /dev/null
+            echo "Updated $tor_list_file with codename: $oscodename"
+        else
+            echo -e "$tor_list_content" | tee "$tor_list_file" > /dev/null
+            echo "Created $tor_list_file with codename: $oscodename"
+        fi
+    else
+        echo "Unsupported distribution: $ID"
+    fi
+else
+    echo "Unsupported distribution: /etc/os-release not found"
 fi
-
-# Append the lines to the tor.list file
-echo "$lines_to_add" | tee -a /etc/apt/sources.list.d/tor.list
-
-echo "Lines added to /etc/apt/sources.list.d/tor.list."
 
 # Add a comment for clarity
 echo "Adding the Tor Project repository and installing Tor..."
