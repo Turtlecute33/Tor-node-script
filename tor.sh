@@ -229,7 +229,7 @@ pattern="^[0-9]+ (MB|GB|TB)$"
 Nickname $nickname
 ContactInfo $contact_info
 AccountingStart week 1 10:00
-AccountingSum $bandwidth1
+AccountingMax $bandwidth1
 ORPort 443
 ExitRelay 0
 SocksPort 0
@@ -259,7 +259,7 @@ pattern="^[0-9]+ (MB|GB|TB)$"
 Nickname $nickname
 ContactInfo $contact_info
 AccountingStart week 1 10:00
-AccountingSum $bandwidth2
+AccountingMax $bandwidth2
 ORPort 443
 ExitRelay 1
 SocksPort 0
