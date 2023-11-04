@@ -1,6 +1,6 @@
 # Tor Node Setup Script
 
-![Tor Logo]([https://upload.wikimedia.org/wikipedia/commons/4/4e/Tor-logo-2011-flat.png](https://turtlecute33.github.io/Turtlecute.org/images/tor.jpg))
+![Tor Logo]([https://turtlecute33.github.io/Turtlecute.org/images/tor.jpg])
 
 ## Description
 This script is designed to simplify the process of setting up a Tor node on your Linux system. Whether you want to run a Tor middle relay or a Tor exit relay, this script will guide you through the configuration steps.
