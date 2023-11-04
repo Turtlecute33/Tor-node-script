@@ -7,7 +7,7 @@ This script is designed to simplify the process of setting up a Tor node on your
 
 ## Prerequisites
 - You should run this script as a superuser (root) to ensure proper permissions.
-- Debian or ubuntu
+- Debian or ubuntu.
   
 ## Usage
 1. Clone the repository or download the script to your Linux system.
