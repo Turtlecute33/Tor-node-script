@@ -215,6 +215,18 @@ if [ "$tor_node_type" -eq 1 ]; then
   echo "I need to know the maximum weekly bandwidth that the node can use. Check on your VPS provider website the maximum monthly data usage (ex: 1 TB) and divide it by 4 (ex: 1 TB / 4 = 250 GB)."
   read -p "Enter the WEEKLY bandwidth that you can use (ex: '200 GB', '1 TB', ecc): " bandwidth1
 
+  # Define the regex pattern for the input
+    pattern="^[0-9]+[[:space:]](MB|GB|TB)$"
+
+    # Check if the input matches the pattern
+    if [[ $bandwidth2 =~ $pattern ]]; then
+        echo "Input is valid."
+        break  # Exit the loop if the input is valid
+    else
+        echo "Input is not valid. Please use the format: One number, space, MB/GB/TB"
+    fi
+done
+
   # Define the Tor middle relay configuration
   torrc_configuration=$(
     cat <<EOL
@@ -237,6 +249,18 @@ else
   read -p "Enter the ContactInfo (your email, ATTENTION it will be published): " contact_info
   echo "I need to know the maximum weekly bandwidth that the node can use. Check on your VPS provider website the maximum monthly data usage (ex: 1 TB) and divide it by 4 (ex: 1 TB / 4 = 250 GB)."
   read -p "Enter the WEEKLY bandwidth that you can use (ex: '200 GB', '1 TB', ecc): " bandwidth2
+
+   # Define the regex pattern for the input
+    pattern="^[0-9]+[[:space:]](MB|GB|TB)$"
+
+    # Check if the input matches the pattern
+    if [[ $bandwidth2 =~ $pattern ]]; then
+        echo "Input is valid."
+        break  # Exit the loop if the input is valid
+    else
+        echo "Input is not valid. Please use the format: One number, space, MB/GB/TB"
+    fi
+done
 
   # Define the Tor exit relay configuration
   torrc_configuration=$(
