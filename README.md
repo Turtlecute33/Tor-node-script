@@ -5,9 +5,6 @@
 ## Description
 This script is designed to simplify the process of setting up a Tor node on your Linux system. Whether you want to run a Tor middle relay or a Tor exit relay, this script will guide you through the configuration steps.
 
-## Author
-This script is maintained by Turtlecute.
-
 ## Prerequisites
 - You should run this script as a superuser (root) to ensure proper permissions.
 
@@ -20,7 +17,7 @@ This script is maintained by Turtlecute.
    ```bash
    ./tor.sh
 
-# Installation Steps
+# what the script does
 
 The script will perform the following steps:
 
@@ -37,7 +34,7 @@ The script will perform the following steps:
 
 ## Note
 
-For Tor exit relays, the script includes a default ExitPolicy that allows certain outgoing connections. Be aware of the legal implications and potential misuse associated with running a Tor exit relay.
+For Tor exit relays, the script includes a restricted ExitPolicy that should reduce abuse mails by vps providers/ISPs but allows certain outgoing connections. Be aware of the legal implications and potential misuse associated with running a Tor exit relay.
 
 # Donations
 
