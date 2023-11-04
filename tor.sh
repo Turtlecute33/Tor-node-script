@@ -225,7 +225,6 @@ if [ "$tor_node_type" -eq 1 ]; then
     else
         echo "Input is not valid. Please use the format: One number, space, MB/GB/TB"
     fi
-done
 
   # Define the Tor middle relay configuration
   torrc_configuration=$(
@@ -260,7 +259,6 @@ else
     else
         echo "Input is not valid. Please use the format: One number, space, MB/GB/TB"
     fi
-done
 
   # Define the Tor exit relay configuration
   torrc_configuration=$(
