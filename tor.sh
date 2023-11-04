@@ -153,11 +153,11 @@ EOL
 
 # Check if the lines are already in the file 20auto-upgrades
 if grep -q "APT::Periodic::Update-Package-Lists" /etc/apt/apt.conf.d/20auto-upgrades; then
-  echo "The lines are already in the file 20auto-upgrades."
+  echo "The lines are already in the file 20auto-upgrades." >/dev/null
 else
   # Append the lines to the configuration file 20auto-upgrades
   echo "$lines_20auto_upgrades" | tee -a /etc/apt/apt.conf.d/20auto-upgrades
-  echo "Lines added to /etc/apt/apt.conf.d/20auto-upgrades."
+  echo "Lines added to /etc/apt/apt.conf.d/20auto-upgrades." >/dev/null
 fi
 
 # Check if the system is running Debian or Ubuntu for setup auto update for the right os
@@ -220,6 +220,7 @@ if [ "$tor_node_type" -eq 1 ]; then
     cat <<EOL
 Nickname $nickname
 ContactInfo $contact_info
+AccoutingRule sum
 AccountingStart week 1 10:00
 AccountingMax $bandwidth1
 ORPort 443
@@ -242,6 +243,7 @@ else
     cat <<EOL
 Nickname $nickname
 ContactInfo $contact_info
+AccoutingRule sum
 AccountingStart week 1 10:00
 AccountingMax $bandwidth2
 ORPort 443
