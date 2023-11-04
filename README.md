@@ -15,4 +15,7 @@ This script is maintained by Turtlecute.
 1. Clone the repository or download the script to your Linux system.
 2. Make the script executable:
    ```bash
-   chmod +x setup-tor-node.sh
+   chmod +x tor.sh
+3. Execute
+   ```bash
+   ./tor.sh
