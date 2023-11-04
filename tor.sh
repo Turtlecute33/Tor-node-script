@@ -228,6 +228,7 @@ pattern="^[0-9]+ (MB|GB|TB)$"
     cat <<EOL
 Nickname $nickname
 ContactInfo $contact_info
+AccountingRule sum
 AccountingStart week 1 10:00
 AccountingMax $bandwidth1
 ORPort 443
@@ -258,6 +259,7 @@ pattern="^[0-9]+ (MB|GB|TB)$"
     cat <<EOL
 Nickname $nickname
 ContactInfo $contact_info
+AccountingRule sum
 AccountingStart week 1 10:00
 AccountingMax $bandwidth2
 ORPort 443
