@@ -228,9 +228,8 @@ pattern="^[0-9]+ (MB|GB|TB)$"
     cat <<EOL
 Nickname $nickname
 ContactInfo $contact_info
-# AccoutingRule sum
 AccountingStart week 1 10:00
-AccountingMax $bandwidth1
+AccountingSum $bandwidth1
 ORPort 443
 ExitRelay 0
 SocksPort 0
@@ -259,9 +258,8 @@ pattern="^[0-9]+ (MB|GB|TB)$"
     cat <<EOL
 Nickname $nickname
 ContactInfo $contact_info
-# AccoutingRule sum
 AccountingStart week 1 10:00
-AccountingMax $bandwidth2
+AccountingSum $bandwidth2
 ORPort 443
 ExitRelay 1
 SocksPort 0
