@@ -17,7 +17,7 @@ This script is designed to simplify the process of setting up a Tor node on your
    ```bash
    ./tor.sh
 
-# what the script does
+# What the script does
 
 The script will perform the following steps:
 
