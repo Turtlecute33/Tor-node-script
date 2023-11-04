@@ -33,7 +33,10 @@ The script will perform the following steps:
 10. Restart the Tor service to apply the changes.
 
 ## Note
-
+For check if your node is running without issues use:
+```bash
+journalact -xeu tor@default
+```
 For Tor exit relays, the script includes a restricted ExitPolicy that should reduce abuse mails by vps providers/ISPs but allows certain outgoing connections. Be aware of the legal implications and potential misuse associated with running a Tor exit relay.
 
 # Donations
