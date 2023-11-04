@@ -1,4 +1,4 @@
-# Tor Node Setup Script
+# Tor Node Setup Script  🌐 🧅
 
 ![Tor Logo](https://turtlecute33.github.io/Turtlecute.org/images/tor.png)
 
