@@ -19,3 +19,32 @@ This script is maintained by Turtlecute.
 3. Execute
    ```bash
    ./tor.sh
+
+# Installation Steps
+
+The script will perform the following steps:
+
+1. Check if the script is run as root to ensure proper permissions.
+2. Update the package list on your system.
+3. Install required dependencies, including unattended-upgrades, apt-listchanges, wget, gpg, and apt-transport-https.
+4. Configure automatic updates for your operating system based on Debian or Ubuntu.
+5. Add the Tor Project repository to your system's sources list.
+6. Download the PGP key and install Tor.
+7. Prompt you to select the type of Tor node: Tor middle relay or Tor exit relay (caution: Tor exit relay can have legal implications).
+8. Configure the selected Tor node type with a nickname, contact information, and bandwidth limits.
+9. Update the Tor configuration in the /etc/tor/torrc file.
+10. Restart the Tor service to apply the changes.
+
+## Note
+
+For Tor exit relays, the script includes a default ExitPolicy that allows certain outgoing connections. Be aware of the legal implications and potential misuse associated with running a Tor exit relay.
+
+# Donations
+
+If you find this script helpful, please consider making a Bitcoin donation to support the author's work at [https://salviamotor.vado.li](https://salviamotor.vado.li).
+
+# Disclaimer
+
+Running a Tor exit relay can expose you to legal issues, and it's essential to understand the responsibilities and potential risks associated with operating such a relay. Make sure to comply with your local laws and regulations.
+
+Happy Tor'ing! 🌐
