@@ -215,7 +215,7 @@ if [ "$tor_node_type" -eq 1 ]; then
   echo "I need to know the maximum weekly bandwidth that the node can use. Check on your VPS provider website the maximum monthly data usage (ex: 1 TB) and divide it by 4 (ex: 1 TB / 4 = 250 GB)."
 pattern="^[0-9]+ (MB|GB|TB)$"
   get_input2() {
-    read -p "Enter the WEEKLY bandwidth that you can use (ex: '200 GB', '1 TB', ecc): " bandwidth2
+    read -p "Enter the WEEKLY bandwidth that you can use (ex: '200 GB', '1 TB', ecc): " bandwidth1
   }
   get_input2
   while [[ ! $bandwidth2 =~ $pattern ]]; do
