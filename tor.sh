@@ -218,7 +218,7 @@ pattern="^[0-9]+ (MB|GB|TB)$"
     read -p "Enter the WEEKLY bandwidth that you can use (ex: '200 GB', '1 TB', ecc): " bandwidth1
   }
   get_input2
-  while [[ ! $bandwidth2 =~ $pattern ]]; do
+  while [[ ! $bandwidth1 =~ $pattern ]]; do
     echo "Unallowed input (ex: '200 GB', '1 TB', ecc)."
     get_input2
   done
