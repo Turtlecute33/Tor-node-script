@@ -5,7 +5,7 @@ jobs:
   Test-script:
     runs-on: ubuntu-latest
     env:
-      input: "\n1\nnickname\nredacted\n20 GB"
+      input: "\n1\nnickname\nredacted\n10 TB\n"
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
