@@ -267,7 +267,6 @@ ExitRelay 1
 SocksPort 0
 DirPort 80
 DirPortFrontPage /etc/tor/tor-exit-notice.html
-ExitPolicy accept *:20-21     # FTP
 ExitPolicy accept *:22        # SSH
 ExitPolicy accept *:23        # Telnet
 ExitPolicy accept *:43        # WHOIS
@@ -334,7 +333,6 @@ ExitPolicy accept *:8074      # Gadu-Gadu
 ExitPolicy accept *:8080      # HTTP Proxies
 ExitPolicy accept *:8082      # HTTPS Electrum Bitcoin port
 ExitPolicy accept *:8087-8088 # Simplify Media SPP Protocol, Radan HTTP
-ExitPolicy accept *:8232-8233 # Zcash
 ExitPolicy accept *:8332-8333 # Bitcoin
 ExitPolicy accept *:8443      # PCsync HTTPS
 ExitPolicy accept *:8888      # HTTP Proxies, NewsEDGE
@@ -344,7 +342,7 @@ ExitPolicy accept *:10000     # Network Data Management Protocol
 ExitPolicy accept *:11371     # OpenPGP hkp (http keyserver protocol)
 ExitPolicy accept *:19294     # Google Voice TCP
 ExitPolicy accept *:19638     # Ensim control panel
-ExitPolicy accept *:50002     # Electrum Bitcoin SSL
+ExitPolicy accept *:50001-50002     # Electrum Bitcoin SSL
 ExitPolicy accept *:64738     # Mumble
 ExitPolicy reject *:*
 EOL
