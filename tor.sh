@@ -19,7 +19,7 @@ echo "$(tput setaf 2)
                BO@@B@.
              :B@L@Bv:@7
            .PB@iBB@ .@Mi
-         .P@B@iE@@r .. 7B@i
+         .P@B@iE@@r . 7B@i
        5@@B@:NB@1$(tput setaf 5) r ri:$(tput bold)$(tput setaf 7)7@M
      .@B@BG.OB@B$(tput setaf 5)  ,.. .i, $(tput bold)$(tput setaf 7)MB,
     @B@BO.B@@B$(tput setaf 5)  i7777,   $(tput bold)$(tput setaf 7)MB.
