@@ -277,4 +277,4 @@ echo "Tor service enabled at boot."
 
 # ===== Done =====
 echo "$(tput bold)$(tput setaf 2)✅ Tor node configured and running!!$(tput sgr0)"
-echo "If this script was useful, visit https://salviamotor.vado.li and consider a Bitcoin donation."
+echo "If this script was useful, visit https://tor.priorato.org and consider a Bitcoin donation."
