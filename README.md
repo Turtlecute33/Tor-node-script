@@ -42,7 +42,7 @@ For Tor exit relays, the script includes a restricted ExitPolicy that should red
 
 # Donations
 
-If you find this script helpful, please consider making a Bitcoin donation to support the author's work at [https://salviamotor.vado.li](https://salviamotor.vado.li).
+If you find this script helpful, please consider making a Bitcoin donation to support the author's work at [https://tor.priorato.org](https://tor.priorato.org).
 
 # Disclaimer
 
