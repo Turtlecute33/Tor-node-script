@@ -46,6 +46,6 @@ If you find this script helpful, please consider making a Bitcoin donation to su
 
 # Disclaimer
 
-Running a Tor exit relay can expose you to legal issues, and it's essential to understand the responsibilities and potential risks associated with operating such a relay <3
+Running a Tor exit relay can expose you to legal issues, and it's essential to understand the responsibilities and potential risks associated with operating such a relay.
 
 Happy Tor'ing! 🌐
